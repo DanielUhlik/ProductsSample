@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Products sample</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Products</string>
+    <string name="about_title">About</string>
+    <string name="product_name">Product name</string>
+    <string name="short_description">Short description</string>
+    <string name="long_description">Long description</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="price">Price</string>
+    <string name="required_field">This field is required</string>
+    <string name="saved_dialog_title">Saved</string>
+    <string name="deleted_dialog_title">Deleted</string>
+    <string name="saved_dialog_desc">Your product have been saved</string>
+    <string name="deleted_dialog_desc">Your product have been deleted</string>
+    <string name="ok">OK</string>
+    <string name="empty_products_list">Your products list is empty</string>
+    <string name="about_application">About application</string>
+    <string name="about_application_text">The application stores created products</string>
+    <string name="author">Author</string>
+    <string name="about_author_text">Daniel Uhlík</string>
+</resources>
