@@ -1,20 +1,14 @@
 package sk.icicleworks.productssample.ui.productEditor
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import sk.icicleworks.productssample.R
 import sk.icicleworks.productssample.database.entities.Product
 import sk.icicleworks.productssample.repositories.interfaces.IProductsRepository
-import java.lang.Exception
-import java.math.BigDecimal
 
-class ProductEditorViewModel (val productsRepository: IProductsRepository, val application: Application): ViewModel() {
+class ProductEditorViewModel(private val productsRepository: IProductsRepository) : ViewModel() {
 
     val productName = MutableLiveData<String>().apply { postValue("") }
     val productShortDesc = MutableLiveData<String>().apply { postValue("") }
@@ -27,7 +21,7 @@ class ProductEditorViewModel (val productsRepository: IProductsRepository, val a
             return productId > 0
         }
 
-    fun getProduct() : Product {
+    private fun getProduct(): Product {
         var priceDouble = 0.0
         try {
             priceDouble = productPrice.value!!.toDouble()
@@ -42,6 +36,13 @@ class ProductEditorViewModel (val productsRepository: IProductsRepository, val a
             productLongDesc.value!!,
             priceDouble
         )
+    }
+
+    fun saveChanges() {
+        if (editMode)
+            updateProduct()
+        else
+            createProduct()
     }
 
     fun createProduct(){

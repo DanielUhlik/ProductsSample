@@ -1,11 +1,7 @@
 package sk.icicleworks.productssample.ui.productEditor
 
 
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_product_editor.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import sk.icicleworks.productssample.R
 import sk.icicleworks.productssample.databinding.FragmentProductEditorBinding
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import sk.icicleworks.productssample.helpers.hideKeyboard
 
 
@@ -48,10 +41,7 @@ class ProductEditorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         save_btn.setOnClickListener {
-            if (viewModel.editMode)
-                viewModel.updateProduct()
-            else
-                viewModel.createProduct()
+            viewModel.saveChanges()
             navigateUp()
         }
 

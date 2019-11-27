@@ -2,7 +2,6 @@ package sk.icicleworks.productssample.adapters.itemViewModels
 
 import android.content.Context
 import sk.icicleworks.productssample.database.entities.Product
-import java.math.BigDecimal
 import java.util.*
 
 data class ProductItemViewModel (
@@ -15,7 +14,7 @@ data class ProductItemViewModel (
     companion object {
         fun create(product: Product, context : Context) : ProductItemViewModel {
             val userCurrency = Currency.getInstance(context.resources.configuration.locale)
-            val price = product.price.toBigDecimal().setScale(2, BigDecimal.ROUND_HALF_UP).toString() + userCurrency.symbol
+            val price = "%.2f${userCurrency.symbol}".format(product.price)
 
             return ProductItemViewModel(
                 product.id ?: 0,
