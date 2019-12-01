@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -17,8 +15,6 @@ import sk.icicleworks.productssample.R
 import sk.icicleworks.productssample.adapters.ProductsAdapter
 import sk.icicleworks.productssample.adapters.decorations.GridSpacingItemDecoration
 import sk.icicleworks.productssample.database.entities.Product
-import sk.icicleworks.productssample.ui.productEditor.ProductEditorFragment
-import sk.icicleworks.productssample.ui.productEditor.ProductEditorFragmentArgs
 
 class DashboardFragment : Fragment() {
 
@@ -31,7 +27,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productsAdapter = ProductsAdapter(null){product ->
+        val productsAdapter = ProductsAdapter { product ->
             openEditor(product)
         }
 
@@ -41,7 +37,7 @@ class DashboardFragment : Fragment() {
         products_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 30, true))
 
         dashboardViewModel.allProducts.observe(this, Observer {products ->
-            productsAdapter.updateData(products)
+            productsAdapter.submitList(products)
             if (products.isNotEmpty())
                 empty_recycler_text.visibility = View.GONE
             else
